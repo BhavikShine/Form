@@ -27,11 +27,14 @@ dotenv.config();
 
 // eslint-disable-next-line no-undef
 const PORT = parseInt(process.env.PORT, 10);
-const HOST = process.env.HOST || "localhost";
 
 app.use(helmet());
 const corsOption = {
-  origin: ["http://localhost:3000", "http://localhost:3001"],
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "https://form-s4em.onrender.com",
+  ],
   credentials: true,
 };
 app.use(cors(corsOption));
@@ -41,7 +44,7 @@ app.use("/api/v1/static", express.static(`${__dirname}/uploads`));
 
 app.use(errorMiddleware);
 
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   db();
-  console.log(`Listening on port http://${HOST}:${PORT}`);
+  console.log(`Listening on port http://localhost:${PORT}`);
 });
